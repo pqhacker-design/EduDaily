@@ -1,0 +1,6 @@
+{
+  "name": "EduDaily - Kiểm Tra Kiến Thức Mỗi Ngày",
+  "description": "Nền tảng kiểm tra kiến thức trắc nghiệm hàng ngày bám sát chương trình GDPT, phân quyền giáo viên - học sinh, thi đua lớp học và đề xuất bài tập bổ trợ thông minh.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

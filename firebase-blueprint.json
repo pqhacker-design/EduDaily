@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile for students, teachers, and admins",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "avatar": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "teacher", "admin"] },
+        "classId": { "type": "string" },
+        "className": { "type": "string" },
+        "streakDays": { "type": "number" },
+        "totalPoints": { "type": "number" },
+        "badgesEarned": { "type": "array" },
+        "schoolName": { "type": "string" },
+        "subjectSpecialty": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "ClassInfo": {
+      "title": "ClassInfo",
+      "description": "School class information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "grade": { "type": "number" },
+        "teacherId": { "type": "string" },
+        "teacherName": { "type": "string" },
+        "academicYear": { "type": "string" }
+      },
+      "required": ["id", "name", "grade", "teacherId", "academicYear"]
+    },
+    "Quiz": {
+      "title": "Quiz",
+      "description": "Quiz test created by teacher or curriculum",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "subject": { "type": "string" },
+        "grade": { "type": "number" },
+        "topic": { "type": "string" },
+        "questions": { "type": "array" },
+        "timeLimitMinutes": { "type": "number" },
+        "maxAttempts": { "type": "number" },
+        "assignedClassIds": { "type": "array" },
+        "createdByTeacherId": { "type": "string" },
+        "createdByTeacherName": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "isDailyChallenge": { "type": "boolean" }
+      },
+      "required": ["id", "title", "subject", "grade", "timeLimitMinutes", "maxAttempts", "assignedClassIds"]
+    },
+    "QuizAttempt": {
+      "title": "QuizAttempt",
+      "description": "Student submission for a quiz",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "quizId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "studentAvatar": { "type": "string" },
+        "studentClass": { "type": "string" },
+        "attemptNumber": { "type": "number" },
+        "answers": { "type": "object" },
+        "score": { "type": "number" },
+        "correctCount": { "type": "number" },
+        "totalQuestions": { "type": "number" },
+        "timeSpentSeconds": { "type": "number" },
+        "submittedAt": { "type": "string" },
+        "missedQuestionIds": { "type": "array" }
+      },
+      "required": ["id", "quizId", "studentId", "attemptNumber", "score", "submittedAt"]
+    },
+    "AppNotification": {
+      "title": "AppNotification",
+      "description": "Notification sent to student or all",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "quizId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "read": { "type": "boolean" }
+      },
+      "required": ["id", "studentId", "title", "message", "type", "createdAt", "read"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles collection"
+    },
+    "/classes/{classId}": {
+      "schema": "ClassInfo",
+      "description": "School classes collection"
+    },
+    "/quizzes/{quizId}": {
+      "schema": "Quiz",
+      "description": "Quizzes collection"
+    },
+    "/attempts/{attemptId}": {
+      "schema": "QuizAttempt",
+      "description": "Student quiz attempts collection"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "AppNotification",
+      "description": "Notifications collection"
+    }
+  }
+}
